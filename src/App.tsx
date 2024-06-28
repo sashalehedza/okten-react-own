@@ -1,5 +1,11 @@
-function App() {
-  return <div>HW 2</div>
+import UsersComponent from './components/users-component/UsersComponent'
+
+const App = () => {
+  return (
+    <div>
+      <UsersComponent />
+    </div>
+  )
 }
 
 export default App
