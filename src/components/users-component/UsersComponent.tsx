@@ -11,7 +11,7 @@ const UsersComponent = () => {
   const [posts, setPosts] = useState<IPost[]>([])
 
   useEffect(() => {
-    getAllUsers().then((value: any) => {
+    getAllUsers().then((value: IUser[]) => {
       setUsers([...value])
     })
   }, [])
