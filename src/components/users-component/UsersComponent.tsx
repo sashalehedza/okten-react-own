@@ -11,7 +11,7 @@ interface UsersComponentState {
 }
 
 class UsersComponent extends Component<{}, UsersComponentState> {
-  constructor(props: {}) {
+  constructor(props: UsersComponentState) {
     super(props)
     this.state = {
       users: [],
