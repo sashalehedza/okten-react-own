@@ -5,7 +5,7 @@ interface IProps {
   posts: IPost[]
 }
 
-class PostsComponent extends Component<IProps> {
+class PostsComponent extends Component<IProps, {}> {
   render() {
     const { posts } = this.props
     return (

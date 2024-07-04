@@ -7,7 +7,7 @@ interface IProps {
   getPosts: (id: number) => void
 }
 
-class UserComponent extends Component<IProps> {
+class UserComponent extends Component<IProps, {}> {
   render() {
     const { user, getPosts } = this.props
     return (
