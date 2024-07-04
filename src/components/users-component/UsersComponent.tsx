@@ -1,40 +1,51 @@
-import { useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import UserComponent from '../user-component/UserComponent'
 import { IUser } from '../../models/IUser'
 import { IPost } from '../../models/IPost'
 import { getAllUsers, getPostsOfUserById } from '../../services/api.service'
-
 import PostsComponent from '../posts-component/PostsComponent'
 
-const UsersComponent = () => {
-  const [users, setUsers] = useState<IUser[]>([])
-  const [posts, setPosts] = useState<IPost[]>([])
+interface UsersComponentState {
+  users: IUser[]
+  posts: IPost[]
+}
 
-  useEffect(() => {
-    getAllUsers().then((value: IUser[]) => {
-      setUsers([...value])
-    })
-  }, [])
-
-  const getPosts = (id: number) => {
-    getPostsOfUserById(id).then((posts) => setPosts([...posts]))
+class UsersComponent extends Component<{}, UsersComponentState> {
+  constructor(props: {}) {
+    super(props)
+    this.state = {
+      users: [],
+      posts: [],
+    }
   }
 
-  return (
-    <div>
-      <hr />
-      <div>
-        {users.map((user) => (
-          <UserComponent key={user.id} user={user} getPosts={getPosts} />
-        ))}
-      </div>
-      <hr />
+  componentDidMount() {
+    getAllUsers().then((value: IUser[]) => {
+      this.setState({ users: [...value] })
+    })
+  }
 
+  getPosts = (id: number) => {
+    getPostsOfUserById(id).then((posts) => this.setState({ posts: [...posts] }))
+  }
+
+  render() {
+    const { users, posts } = this.state
+    return (
       <div>
-        <PostsComponent posts={posts} />
+        <hr />
+        <div>
+          {users.map((user) => (
+            <UserComponent key={user.id} user={user} getPosts={this.getPosts} />
+          ))}
+        </div>
+        <hr />
+        <div>
+          <PostsComponent posts={posts} />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default UsersComponent
