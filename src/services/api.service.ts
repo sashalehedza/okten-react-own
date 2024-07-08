@@ -1,9 +1,8 @@
 import axios from 'axios'
-import { IUser } from '../models/IUser'
-import { IPost } from '../models/IPost'
+import { IPost, IPostResponse } from '../models/IPost'
 
 let axiosInstance = axios.create({
-  baseURL: 'https://dummyjson.com',
+  baseURL: 'https://jsonplaceholder.typicode.com',
 })
 
 axiosInstance.interceptors.request.use((request) => {
@@ -11,17 +10,14 @@ axiosInstance.interceptors.request.use((request) => {
   return request
 })
 
-const getAllUsers = async (): Promise<IUser[]> => {
+let postData = async (data: IPost): Promise<IPostResponse> => {
   return await axiosInstance
-    .get('/users')
-    .then((res) => res.data)
-    .then((data) => data.users)
-}
-let getPostsOfUserById = async (id: number): Promise<IPost[]> => {
-  return await axiosInstance
-    .get('/users/' + id + '/posts')
+    .post('/posts', data, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    })
     .then((response) => response.data)
-    .then((data) => data.posts)
 }
 
-export { getAllUsers, getPostsOfUserById }
+export { postData }

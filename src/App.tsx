@@ -1,9 +1,9 @@
-import UsersComponent from './components/users-component/UsersComponent'
+import FormComponent from './components/FormComponent'
 
 const App = () => {
   return (
     <div>
-      <UsersComponent />
+      <FormComponent />
     </div>
   )
 }

@@ -1,22 +1,7 @@
 export type IPost = {
-  body: string
-  id: number
   title: string
+  body: string
   userId: number
-  views: number
-  tags: string[]
-  reactions: {
-    dislikes: number
-    likes: number
-  }
 }
 
-export type Response = {
-  limit: number
-  skip: number
-  total: number
-}
-
-export type PostsResponse = Response & {
-  posts: IPost[]
-}
+export type IPostResponse = IPost & { id: number }
