@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import postValidator from '../validators/post.validator'
 import { IPost } from '../models/IPost'
-import axios from 'axios'
 import { postData } from '../services/api.service'
 
 const FormComponent = () => {
@@ -18,7 +17,6 @@ const FormComponent = () => {
   const formSubmitCustomHandler = async (data: IPost) => {
     try {
       const response = await postData(data)
-
       console.log(response)
     } catch (error) {
       console.error('Error submitting form:', error)
