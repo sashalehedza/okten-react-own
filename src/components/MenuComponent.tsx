@@ -15,7 +15,7 @@ const MenuComponent = () => {
           <Link to={'posts'}>posts page</Link>
         </li>
         <li>
-          <Link to={'comments'}>commnets page</Link>
+          <Link to={'comments'}>comments page</Link>
         </li>
         <li>
           <Link to={'todos'}>todos page</Link>

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { IUser } from '../../models/IUser'
+import styles from './UserComponent.module.css'
 
 interface IProps {
   user: IUser
@@ -7,7 +8,7 @@ interface IProps {
 
 const CommentComponent: FC<IProps> = ({ user }) => {
   return (
-    <div>
+    <div className={styles.user}>
       <p>Id: {user.id}</p>
       <p>Username: {user.username}</p>
       <p>Email: {user.email}</p>
