@@ -5,6 +5,7 @@ import PostsPage from './pages/posts/PostsPage'
 import CommentsPage from './pages/comments/CommentsPage'
 import CustomErrorLayout from './layouts/CustomErrorLayout'
 import HomePage from './pages/HomePage'
+import SingleUserPage from './pages/users/SingleUserPage'
 
 let router = createBrowserRouter([
   {
@@ -14,13 +15,9 @@ let router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'users', element: <UsersPage /> },
+      { path: 'users/:id', element: <SingleUserPage /> },
       { path: 'posts', element: <PostsPage /> },
       { path: 'comments', element: <CommentsPage /> },
-      // {
-      //   path: 'todos',
-      //   element: <TodosPage />,
-      //   children: [{ path: ':id', element: <TodoPage /> }],
-      // },
     ],
   },
 ])

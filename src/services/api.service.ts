@@ -22,6 +22,16 @@ let getAllUsers = async (): Promise<IUser[]> => {
     .then((response) => response.data)
 }
 
+let getSingleUser = async (id: number): Promise<IUser> => {
+  return await axiosInstance
+    .get(`/users/${id}`, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then((response) => response.data)
+}
+
 let getAllPosts = async (): Promise<IPost[]> => {
   return await axiosInstance
     .get('/posts', {
@@ -42,4 +52,4 @@ let getAllComments = async (): Promise<IComment[]> => {
     .then((response) => response.data)
 }
 
-export { getAllUsers, getAllPosts, getAllComments }
+export { getAllUsers, getSingleUser, getAllPosts, getAllComments }
