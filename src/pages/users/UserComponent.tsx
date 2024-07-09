@@ -6,7 +6,7 @@ interface IProps {
   user: IUser
 }
 
-const CommentComponent: FC<IProps> = ({ user }) => {
+const UserComponent: FC<IProps> = ({ user }) => {
   return (
     <div className={styles.user}>
       <p>Id: {user.id}</p>
@@ -16,4 +16,4 @@ const CommentComponent: FC<IProps> = ({ user }) => {
   )
 }
 
-export default CommentComponent
+export default UserComponent
