@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { IUser } from '../models/IUser'
+import { IPost } from '../models/IPost'
+import { IComment } from '../models/IComment'
 
 let axiosInstance = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com',
@@ -9,7 +12,7 @@ axiosInstance.interceptors.request.use((request) => {
   return request
 })
 
-let getAllUsers = async (): Promise<any> => {
+let getAllUsers = async (): Promise<IUser[]> => {
   return await axiosInstance
     .get('/users', {
       headers: {
@@ -19,7 +22,7 @@ let getAllUsers = async (): Promise<any> => {
     .then((response) => response.data)
 }
 
-let getAllPosts = async (): Promise<any> => {
+let getAllPosts = async (): Promise<IPost[]> => {
   return await axiosInstance
     .get('/posts', {
       headers: {
@@ -29,7 +32,7 @@ let getAllPosts = async (): Promise<any> => {
     .then((response) => response.data)
 }
 
-let getAllComments = async (): Promise<any> => {
+let getAllComments = async (): Promise<IComment[]> => {
   return await axiosInstance
     .get('/comments', {
       headers: {

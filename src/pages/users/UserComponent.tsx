@@ -5,14 +5,14 @@ interface IProps {
   user: IUser
 }
 
-const UserComponent: FC<IProps> = ({ user }) => {
+const CommentComponent: FC<IProps> = ({ user }) => {
   return (
     <div>
       <p>Id: {user.id}</p>
       <p>Username: {user.username}</p>
-      <p>Age: {user.age}</p>
+      <p>Email: {user.email}</p>
     </div>
   )
 }
 
-export default UserComponent
+export default CommentComponent
