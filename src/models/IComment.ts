@@ -1,7 +1,13 @@
-export type IComment = {
+interface IUser {
   id: number
-  postId: number
-  name: string
-  email: string
+  username: string
+  fullName: string
+}
+
+export interface IComment {
+  id: number
   body: string
+  postId: number
+  likes: number
+  user: IUser
 }

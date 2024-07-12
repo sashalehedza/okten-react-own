@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import CommentComponent from './CommentComponent'
-import { IComment } from '../../models/IComment'
 import { useSearchParams } from 'react-router-dom'
+import CommentComponent from './CommentComponent'
 import PaginationComponent from '../../components/PaginationComponent'
+import { IComment } from '../../models/IComment'
+import { getAllComments } from '../../services/api.service'
 
 const CommentsComponent = () => {
   let [searchParams] = useSearchParams()
@@ -10,22 +11,11 @@ const CommentsComponent = () => {
   const [comments, setComments] = useState<IComment[]>([])
 
   useEffect(() => {
-    let skip
-    if (page) {
-      skip = +page * 30 - 30
+    let skip = page ? +page * 30 - 30 : 0
 
-      fetch('https://dummyjson.com/comments?skip=' + skip)
-        .then((value) => value.json())
-        .then((value) => {
-          setComments(value.comments)
-        })
-    } else {
-      fetch('https://dummyjson.com/comments')
-        .then((value) => value.json())
-        .then((value) => {
-          setComments(value.comments)
-        })
-    }
+    getAllComments(skip)
+      .then((data) => setComments(data))
+      .catch((error) => console.error('Error fetching comments:', error))
   }, [page])
 
   return (

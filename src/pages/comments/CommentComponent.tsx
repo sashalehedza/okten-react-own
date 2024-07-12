@@ -11,8 +11,6 @@ const CommentComponent: FC<IProps> = ({ comment }) => {
     <div className={styles.comment}>
       <p>Id: {comment.id}</p>
       <p>PostId: {comment.postId}</p>
-      <p>Name: {comment.name}</p>
-      <p>Email: {comment.email}</p>
       <p>Body: {comment.body}</p>
     </div>
   )

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import PostComponent from './PostComponent'
-import { IPost } from '../../models/IPost'
 import { useSearchParams } from 'react-router-dom'
+import PostComponent from './PostComponent'
 import PaginationComponent from '../../components/PaginationComponent'
+import { IPost } from '../../models/IPost'
+import { getAllPosts } from '../../services/api.service'
 
 const PostsComponent = () => {
   let [searchParams] = useSearchParams()
@@ -10,22 +11,11 @@ const PostsComponent = () => {
   const [posts, setPosts] = useState<IPost[]>([])
 
   useEffect(() => {
-    let skip
-    if (page) {
-      skip = +page * 30 - 30
+    let skip = page ? +page * 30 - 30 : 0
 
-      fetch('https://dummyjson.com/posts?skip=' + skip)
-        .then((value) => value.json())
-        .then((value) => {
-          setPosts(value.posts)
-        })
-    } else {
-      fetch('https://dummyjson.com/posts')
-        .then((value) => value.json())
-        .then((value) => {
-          setPosts(value.posts)
-        })
-    }
+    getAllPosts(skip)
+      .then((data) => setPosts(data))
+      .catch((error) => console.error('Error fetching posts:', error))
   }, [page])
 
   return (

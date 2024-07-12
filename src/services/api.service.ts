@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { IUser } from '../models/IUser'
 import { IPost } from '../models/IPost'
+import { IUser } from '../models/IUser'
 import { IComment } from '../models/IComment'
 
 let axiosInstance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: 'https://dummyjson.com',
 })
 
 axiosInstance.interceptors.request.use((request) => {
@@ -12,44 +12,28 @@ axiosInstance.interceptors.request.use((request) => {
   return request
 })
 
-let getAllUsers = async (): Promise<IUser[]> => {
+let getAllUsers = async (skip = 0): Promise<IUser[]> => {
   return await axiosInstance
-    .get('/users', {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    })
-    .then((response) => response.data)
+    .get('/users', { params: { skip } })
+    .then((response) => response.data.users)
 }
 
 let getSingleUser = async (id: number): Promise<IUser> => {
   return await axiosInstance
-    .get(`/users/${id}`, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    })
+    .get(`/users/${id}`)
     .then((response) => response.data)
 }
 
-let getAllPosts = async (): Promise<IPost[]> => {
+let getAllPosts = async (skip = 0): Promise<IPost[]> => {
   return await axiosInstance
-    .get('/posts', {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    })
-    .then((response) => response.data)
+    .get('/posts', { params: { skip } })
+    .then((response) => response.data.posts)
 }
 
-let getAllComments = async (): Promise<IComment[]> => {
+let getAllComments = async (skip = 0): Promise<IComment[]> => {
   return await axiosInstance
-    .get('/comments', {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    })
-    .then((response) => response.data)
+    .get('/comments', { params: { skip } })
+    .then((response) => response.data.comments)
 }
 
 export { getAllUsers, getSingleUser, getAllPosts, getAllComments }
