@@ -24,6 +24,12 @@ let getSingleUser = async (id: number): Promise<IUser> => {
     .then((response) => response.data)
 }
 
+let getPostsOfUser = async (id: number): Promise<IPost[]> => {
+  return await axiosInstance
+    .get(`/users/${id}/posts`)
+    .then((response) => response.data.posts)
+}
+
 let getAllPosts = async (skip = 0): Promise<IPost[]> => {
   return await axiosInstance
     .get('/posts', { params: { skip } })
@@ -36,4 +42,10 @@ let getAllComments = async (skip = 0): Promise<IComment[]> => {
     .then((response) => response.data.comments)
 }
 
-export { getAllUsers, getSingleUser, getAllPosts, getAllComments }
+export {
+  getAllUsers,
+  getSingleUser,
+  getPostsOfUser,
+  getAllPosts,
+  getAllComments,
+}
