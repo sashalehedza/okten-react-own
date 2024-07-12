@@ -13,7 +13,7 @@ function SingleUserPage() {
     getSingleUser(Number(id)).then((value: IUser) => {
       setSingleUser(value)
     })
-    getPostsOfUser(Number(id)).then((data) => {
+    getPostsOfUser(Number(id)).then((data: IPost[]) => {
       setPosts(data)
     })
   }, [id])
