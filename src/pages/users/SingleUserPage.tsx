@@ -14,8 +14,6 @@ function SingleUserPage() {
       setSingleUser(value)
     })
     getPostsOfUser(Number(id)).then((data) => {
-      console.log(data)
-
       setPosts(data)
     })
   }, [id])
