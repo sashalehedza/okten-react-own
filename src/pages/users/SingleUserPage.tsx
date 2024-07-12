@@ -25,7 +25,7 @@ function SingleUserPage() {
       <hr />
       <h3>Posts</h3>
       {posts.map((post) => (
-        <div>
+        <div key={post.id}>
           {post.id} - {post.title}
         </div>
       ))}
