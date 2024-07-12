@@ -1,16 +1,32 @@
 import { useEffect, useState } from 'react'
 import UserComponent from './UserComponent'
 import { IUser } from '../../models/IUser'
-import { getAllUsers } from '../../services/api.service'
+import { useSearchParams } from 'react-router-dom'
+import PaginationComponent from '../../components/PaginationComponent'
 
 const UsersComponent = () => {
+  let [searchParams] = useSearchParams()
+  let page = searchParams.get('page')
   const [users, setUsers] = useState<IUser[]>([])
 
   useEffect(() => {
-    getAllUsers().then((value: IUser[]) => {
-      setUsers([...value])
-    })
-  }, [])
+    let skip
+    if (page) {
+      skip = +page * 30 - 30
+
+      fetch('https://dummyjson.com/users?skip=' + skip)
+        .then((value) => value.json())
+        .then((value) => {
+          setUsers(value.users)
+        })
+    } else {
+      fetch('https://dummyjson.com/users')
+        .then((value) => value.json())
+        .then((value) => {
+          setUsers(value.users)
+        })
+    }
+  }, [page])
 
   return (
     <div>
@@ -21,6 +37,7 @@ const UsersComponent = () => {
         ))}
       </div>
       <hr />
+      <PaginationComponent />
     </div>
   )
 }
